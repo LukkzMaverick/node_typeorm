@@ -1,8 +1,20 @@
 import "reflect-metadata";
-import {createConnection} from "typeorm";
+import {createConnection, getConnection, getRepository} from "typeorm";
+import { Task } from "./entity/Task";
 
-// (async () => {
-//     const connection = await createConnection()
-// })()
-createConnection().then(()=> console.log("connected to database"))
-.catch((err)=> console.log(err))
+(async () => {
+    try {
+        await createConnection()
+        // const entityManager = getConnection().manager
+        // const res = await entityManager.findAndCount(Task)
+        // console.log(res)
+
+        const taskRepository = getRepository(Task)
+        const res = await taskRepository.findAndCount()
+        console.log(res)
+    } catch (error) {
+        console.error(error)
+    }
+})()
+// createConnection("con1").then(()=> console.log("connected to database"))
+// .catch((err)=> console.log(err))
