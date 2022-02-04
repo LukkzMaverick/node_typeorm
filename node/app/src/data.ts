@@ -9,8 +9,7 @@ import { TaskRepository } from "./entity/TaskRepository";
         const task = new Task()
         task.title = "Tarefa"
         task.done = false
-        const res = await taskRepository.save(task)
-        console.log(res)
+        await taskRepository.save(task)
     } catch (error) {
         console.error(error)
     }
